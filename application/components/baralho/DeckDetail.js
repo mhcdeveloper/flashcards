@@ -16,6 +16,7 @@ class DeckDetail extends Component {
 
     render() {
         const { deck } = this.state;
+        const { navigation } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
@@ -23,10 +24,12 @@ class DeckDetail extends Component {
                     <Text>{deck.numberCards}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => navigation.navigate('NewQuestion')}>
                         <Text style={styles.buttonText}>Add Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => navigation.navigate('QuizDeck')}>
                         <Text style={styles.buttonText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>

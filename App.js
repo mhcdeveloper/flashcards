@@ -7,6 +7,8 @@ import { purple, white } from './application/common/colors';
 import ListDecks from './application/components/baralho/ListDecks';
 import NewDeck from './application/components/baralho/NewDeck';
 import DeckDetail from './application/components/baralho/DeckDetail';
+import NewQuestion from './application/components/baralho/NewQuestion';
+import QuizDeck from './application/components/baralho/QuizDeck';
 
 const Tabs = TabNavigator({
     ListDecks: {
@@ -52,6 +54,27 @@ const MainNavigator = StackNavigator({
     screen: DeckDetail,
     navigationOptions: {
       headerTintColor: white,
+      title: 'Deck Detail',
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  QuizDeck: {
+    screen: QuizDeck,
+    navigationOptions: {
+      headerTintColor: white,
+      title: 'Quiz',
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      title: 'Add Card',
       headerStyle: {
         backgroundColor: purple
       }
