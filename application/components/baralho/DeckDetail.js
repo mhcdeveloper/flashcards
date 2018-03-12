@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    TouchableOpacity, 
+} from 'react-native';
 
 class DeckDetail extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            deck: {}
+            deck: {},   
         }
     }
 
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#fff',
         textAlign: 'center'
-    }
+    },
 })
 
 export default DeckDetail;

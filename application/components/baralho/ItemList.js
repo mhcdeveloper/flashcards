@@ -1,20 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Platform, 
+    TouchableOpacity, Animated,
+} from 'react-native';
 
 import { white } from '../../common/colors';
 
-const ItemList = ({ item, navigation }) => {
-    return(
-        <View style={styles.item}>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('DeckDetail', { item: item })}>
-                <View>
-                    <Text>{item.title}</Text>
-                    <Text>{item.numberCards}</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
+class ItemList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bounceValue: new Animated.Value(1)
+        }
+    }
+
+    openDetail = (item) => {
+        const { bounceValue } = this.state;
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 200, toValue: 1.04 }),
+            Animated.spring(bounceValue, { toValue: 1, friction: 4 })
+        ]).start();
+        this.props.navigation.navigate('DeckDetail', { item });
+    }
+
+    render() {
+        const { bounceValue } = this.state;
+        const { item } = this.props;
+        return (
+            <View style={styles.item}>
+                <TouchableOpacity
+                    onPress={() => this.openDetail(item)}>
+                    <View>
+                        <Animated.Text style={[ styles.title, {transform: [{scale: bounceValue}]} ]}>{item.title}</Animated.Text>
+                        <Animated.Text style={[ styles.cards, {transform: [{scale: bounceValue}]} ]}>{item.numberCards}</Animated.Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -34,7 +60,15 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         }
-    }
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: '300',
+    },
+    cards: {
+        fontSize: 18,
+        textAlign: 'center'
+    },
 })
 
 export default ItemList;
