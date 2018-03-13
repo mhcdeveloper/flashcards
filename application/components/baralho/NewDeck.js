@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
     View, 
     Text, 
@@ -7,23 +7,42 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-const NewDeck = () => {
-    return(
-        <View style={styles.container}>
-            <Text style={styles.textLabel}>What is the title of your new deck ?</Text>
-            <TextInput 
-                underlineColorAndroid="transparent" 
-                placeholder="Title" 
-                placeholderTextColor='#0082c9'
-                style={styles.textInput}
-                />
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                </TouchableOpacity>
+import { createDeck } from '../../api';
+
+class NewDeck extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: ''
+        }
+    }
+
+    createDeck = () => {
+        const { title } = this.state;
+        createDeck(title);
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.textLabel}>What is the title of your new deck ?</Text>
+                <TextInput 
+                    underlineColorAndroid="transparent" 
+                    placeholder="Title" 
+                    placeholderTextColor='#0082c9'
+                    style={styles.textInput}
+                    onChangeText={title => this.setState({ title })}
+                    />
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                        onPress={() => this.createDeck()}
+                        style={styles.button}>
+                        <Text style={styles.buttonText}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
-    )
+        )
+    }
 }
 
 const styles = StyleSheet.create({

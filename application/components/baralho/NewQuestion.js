@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 
+import { submitQuestion } from '../../api';
+
 class NewQuestion extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            question: '',
+            answer: ''
+        }
+    }
+
+    createQuestion = (item) => {
+        const item = this.props.navigation.state.params.deck;
+        submitQuestion(item.title, this.state);
     }
 
     render() {
