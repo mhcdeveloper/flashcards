@@ -1,15 +1,24 @@
 import { AsyncStorage } from 'react-native';
 
-const baralhoKey = '@MyDeckStore:key';
+import { DECK_KEY } from '../common/helpers/consts';
 
-export function createDeck({ key }) {
-    return AsyncStorage.mergeItem(baralhoKey, JSON.stringify({
+export function createDeck(key) {
+    alert(key)
+    return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
         key
     }))
+
+    getDeck();
 }
 
-export function submitQuestion({ deck, key }) {
-    return AsyncStorage.mergeItem(baralhoKey, JSON.stringify({
+function getDeck() {
+    AsyncStorage.getItem(DECK_KEY, (err, result) => {
+        alert(result);
+    });
+}
+
+export function submitQuestion(deck, key) {
+    return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
         [key]: deck,
     }));
 }

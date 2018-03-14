@@ -1,39 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, FlatList, AsyncStorage } from 'react-native';
 
 import ItemList from './ItemList';
+import { DECK_KEY } from '../../common/helpers/consts';
 
-const baralhos = [
-    {
-        id: '1',
-        title: 'Cards',
-        numberCards: '4'
-    },
-    {
-        id: '2',
-        title: 'JavaScript',
-        numberCards: '4'
+class ListDecks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            decks: []
+        }
     }
-]
 
-const ListDecks = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-            <FlatList
-                keyExtractor={(item, index) => index}
-                data={baralhos}
-                renderItem={({ item, index }) => {
-                    return (
-                        <ItemList 
-                            item={item} 
-                            index={index} 
-                            navigation={navigation}
-                        />
-                    );
-                }}>
-            </FlatList>
-        </View>
-    )
+    componentDidMount = () => {
+        AsyncStorage.getItem(DECK_KEY, (err, decks) => {
+            this.setState({ decks }),
+            console.log(decks)
+        });
+    }
+
+    render() {
+        const { decks } = this.state;
+        const { navigation } = this.props;
+        console.log(decks)
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    keyExtractor={(item, index) => index}
+                    data={decks}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <ItemList 
+                                item={item} 
+                                index={index} 
+                                navigation={navigation}
+                            />
+                        );
+                    }}>
+                </FlatList>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({

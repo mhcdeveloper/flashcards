@@ -12,9 +12,9 @@ class NewQuestion extends Component {
         }
     }
 
-    createQuestion = (item) => {
-        const item = this.props.navigation.state.params.deck;
-        submitQuestion(item.title, this.state);
+    createQuestion = () => {
+        const key = this.props.navigation.state.params.deck;
+        submitQuestion(this.state, key.title);
     }
 
     render() {
@@ -25,17 +25,21 @@ class NewQuestion extends Component {
                         underlineColorAndroid="transparent" 
                         placeholder="Question" 
                         placeholderTextColor='#0082c9'
+                        onChangeText={(question) => this.setState({ question })}
                         style={styles.textInput}
                         />
                     <TextInput
                         underlineColorAndroid="transparent" 
                         placeholder="Answer" 
                         placeholderTextColor='#0082c9'
+                        onChangeText={(answer) => this.setState({ answer })}
                         style={styles.textInput}
                          />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                        onPress={() => this.createQuestion()} 
+                        style={styles.button}>
                         <Text style={styles.buttonText}>Submit</Text>
                     </TouchableOpacity>
                 </View>

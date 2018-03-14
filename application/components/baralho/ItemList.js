@@ -17,6 +17,10 @@ class ItemList extends Component {
         }
     }
 
+    componentWillMount() {
+        console.log(this.props.item);
+    }
+
     openDetail = (item) => {
         const { bounceValue } = this.state;
         Animated.sequence([

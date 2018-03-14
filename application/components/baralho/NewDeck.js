@@ -4,7 +4,8 @@ import {
     Text, 
     TextInput, 
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    AsyncStorage
 } from 'react-native';
 
 import { createDeck } from '../../api';
@@ -15,6 +16,12 @@ class NewDeck extends Component {
         this.state = {
             title: ''
         }
+    }
+
+    componentDidMount = () => {
+       AsyncStorage.clear();
+        // AsyncStorage.getItem('@MyDeckStore:key')
+        //     .then(value => alert(value));
     }
 
     createDeck = () => {
