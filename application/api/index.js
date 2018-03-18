@@ -3,12 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { DECK_KEY } from '../common/helpers/consts';
 
 export function createDeck(key) {
-    alert(key)
-    return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
-        key
-    }))
-
-    getDeck();
+    return AsyncStorage.setItem(DECK_KEY, JSON.stringify(key))
 }
 
 function getDeck() {

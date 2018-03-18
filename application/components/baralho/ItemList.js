@@ -18,7 +18,7 @@ class ItemList extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.item);
+        alert(this.props.data);
     }
 
     openDetail = (item) => {

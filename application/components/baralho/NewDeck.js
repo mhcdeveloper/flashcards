@@ -19,7 +19,7 @@ class NewDeck extends Component {
     }
 
     componentDidMount = () => {
-       AsyncStorage.clear();
+     //  AsyncStorage.clear();
         // AsyncStorage.getItem('@MyDeckStore:key')
         //     .then(value => alert(value));
     }
