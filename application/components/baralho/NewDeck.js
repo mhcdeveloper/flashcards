@@ -18,12 +18,6 @@ class NewDeck extends Component {
         }
     }
 
-    componentDidMount = () => {
-     //  AsyncStorage.clear();
-        // AsyncStorage.getItem('@MyDeckStore:key')
-        //     .then(value => alert(value));
-    }
-
     createDeck = () => {
         const { title } = this.state;
         createDeck(title);

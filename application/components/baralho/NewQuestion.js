@@ -14,7 +14,8 @@ class NewQuestion extends Component {
 
     createQuestion = () => {
         const key = this.props.navigation.state.params.deck;
-        submitQuestion(this.state, key.title);
+        key.question.push(this.state)
+        submitQuestion(key);
     }
 
     render() {

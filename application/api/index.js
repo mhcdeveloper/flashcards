@@ -3,17 +3,22 @@ import { AsyncStorage } from 'react-native';
 import { DECK_KEY } from '../common/helpers/consts';
 
 export function createDeck(key) {
-    return AsyncStorage.setItem(DECK_KEY, JSON.stringify(key))
-}
-
-function getDeck() {
-    AsyncStorage.getItem(DECK_KEY, (err, result) => {
-        alert(result);
-    });
-}
-
-export function submitQuestion(deck, key) {
+    alert(key)
     return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
-        [key]: deck,
+        [key]: {
+            title: key,
+            question: []
+        }
+    }));
+}
+
+export function submitQuestion(deck) {
+    return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
+        [deck.title]: {
+            title: deck.title,
+            question: [
+                deck.question
+            ]
+        }
     }));
 }
