@@ -26,7 +26,7 @@ class DeckDetail extends Component {
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Text>{deck.title}</Text>
-                    <Text>{deck.numberCards}</Text>
+                    {/* <Text>{deck.questions}</Text> */}
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button}

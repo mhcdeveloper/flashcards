@@ -5,7 +5,8 @@ class QuizDeck extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deck: {}
+            deck: '',
+            position: 1
         }
     }
 
@@ -15,11 +16,11 @@ class QuizDeck extends Component {
     }
 
     render () {
-        const { deck } = this.state;
-        console.log(deck[1])
+        const { deck, position } = this.state;
+        console.log(deck[position].question)
         return (
             <View>
-                {Object.deck.map(item => console.log(item))}
+                <Text>{`${position}/${deck.length}`}</Text>
             </View>
         )
     }

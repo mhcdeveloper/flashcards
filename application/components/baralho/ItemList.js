@@ -35,7 +35,7 @@ class ItemList extends Component {
                     onPress={() => this.openDetail(item)}>
                     <View>
                         <Animated.Text style={[ styles.title, {transform: [{scale: bounceValue}]} ]}>{item.title}</Animated.Text>
-                        <Animated.Text style={[ styles.cards, {transform: [{scale: bounceValue}]} ]}>{item.question} - Cards</Animated.Text>
+                        <Animated.Text style={[ styles.cards, {transform: [{scale: bounceValue}]} ]}>{item.questions.length} - Cards</Animated.Text>
                     </View>
                 </TouchableOpacity>
             </View>
