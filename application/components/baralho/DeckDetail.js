@@ -34,7 +34,7 @@ class DeckDetail extends Component {
                         <Text style={styles.buttonText}>Add Card</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => navigation.navigate('QuizDeck', { deck: deck.questions })}>
+                        onPress={() => navigation.navigate('QuizDeck', { deck: deck })}>
                         <Text style={styles.buttonText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
