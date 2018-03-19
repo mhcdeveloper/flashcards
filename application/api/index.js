@@ -7,18 +7,35 @@ export function createDeck(key) {
     return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
         [key]: {
             title: key,
-            question: []
+            questions: []
         }
     }));
 }
 
-export function submitQuestion(deck) {
-    return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
-        [deck.title]: {
-            title: deck.title,
-            question: [
-                deck.question
-            ]
-        }
-    }));
+function getDeck(key) {
+    return AsyncStorage.getItem(DECK_KEY)
+        .then(decks => {
+            decks = JSON.parse(decks) || []
+            return decks[key]
+            // return decks.filter(deck => deck.key === key)
+        })
+}
+
+export function submitQuestion(key, card) {
+    // return AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
+    //     [deck.title]: {
+    //         title: deck.title,
+    //         questions: [
+    //             ...deck.questions
+    //         ]
+    //     }
+    // }));
+
+    return getDeck(key) //implementa essa função na tua API
+        .then(deck => {
+            deck.questions.push(card),
+            AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
+                [key]: deck
+            }))
+        })
 }

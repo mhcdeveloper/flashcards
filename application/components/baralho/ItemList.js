@@ -16,7 +16,7 @@ class ItemList extends Component {
             bounceValue: new Animated.Value(1)
         }
     }
-
+    
     openDetail = (item) => {
         const { bounceValue } = this.state;
         Animated.sequence([
@@ -35,7 +35,7 @@ class ItemList extends Component {
                     onPress={() => this.openDetail(item)}>
                     <View>
                         <Animated.Text style={[ styles.title, {transform: [{scale: bounceValue}]} ]}>{item.title}</Animated.Text>
-                        <Animated.Text style={[ styles.cards, {transform: [{scale: bounceValue}]} ]}>{item.question.legth}</Animated.Text>
+                        <Animated.Text style={[ styles.cards, {transform: [{scale: bounceValue}]} ]}>{item.question} - Cards</Animated.Text>
                     </View>
                 </TouchableOpacity>
             </View>

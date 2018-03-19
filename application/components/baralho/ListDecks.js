@@ -6,7 +6,8 @@ import {
     FlatList, 
     AsyncStorage, 
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    RefreshControl
 } from 'react-native';
 
 import ItemList from './ItemList';
@@ -35,10 +36,15 @@ class ListDecks extends Component {
     render() {
         const { decks, refreshing } = this.state;
         const { navigation } = this.props;
-        console.log(decks)
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.container} >
+                <ScrollView 
+                    refreshControl={
+                        <RefreshControl 
+                            refreshing={refreshing}
+                            onRefresh={this.onRefresh.bind(this)} />
+                    }
+                    style={styles.container} >
                     {decks && Object.keys(decks).map((title, i) => {
                     const deck = decks[title];
                     return (

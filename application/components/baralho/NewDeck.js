@@ -17,7 +17,7 @@ class NewDeck extends Component {
             title: ''
         }
     }
-
+    
     createDeck = () => {
         const { title } = this.state;
         createDeck(title);
