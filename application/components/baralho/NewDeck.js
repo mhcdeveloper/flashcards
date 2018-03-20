@@ -20,7 +20,12 @@ class NewDeck extends Component {
     
     createDeck = () => {
         const { title } = this.state;
-        createDeck(title);
+        const { navigation } = this.props;
+        if(title) {
+            createDeck(title, navigation);
+        } else {
+            alert('Campo title é obrigatório!')
+        }
     }
 
     render() {

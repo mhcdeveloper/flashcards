@@ -29,7 +29,7 @@ class ListDecks extends Component {
     onRefresh() {
         this.setState({ refreshing: true });
         AsyncStorage.getItem(DECK_KEY, (err, results) => {
-            this.setState({ decks: Object.values(JSON.parse(results)), refreshing: false });
+            this.setState({ decks: JSON.parse(results), refreshing: false });
         });
     }
 

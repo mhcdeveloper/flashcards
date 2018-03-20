@@ -15,7 +15,7 @@ class DeckDetail extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({ deck: this.props.navigation.state.params.item })
     }
 
@@ -25,17 +25,17 @@ class DeckDetail extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <Text>{deck.title}</Text>
-                    {/* <Text>{deck.questions}</Text> */}
+                    <Text style={styles.textHeader}>{deck.title}</Text>
+                    <Text style={styles.textHeader}>{`${deck.questions.length} - Cards`}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => navigation.navigate('NewQuestion', { deck: deck })}>
-                        <Text style={styles.buttonText}>Add Card</Text>
+                        <Text style={styles.buttonText}>Create New Question</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
                         onPress={() => navigation.navigate('QuizDeck', { deck: deck })}>
-                        <Text style={styles.buttonText}>Start Quiz</Text>
+                        <Text style={styles.buttonText}>Start a Quiz</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     headerContainer: {
         flex: 3
     },
+    textHeader: {
+        fontSize: 30,
+        fontWeight: '500',
+        textAlign: 'center',
+    },
     buttoContainer: {
         flex: 1
     },
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
         width: 300,
         backgroundColor: '#0082c9',
         borderRadius: 25,
-        marginVertical: 10,
+        marginVertical: 3,
         paddingVertical: 12
     },
     buttonText: {

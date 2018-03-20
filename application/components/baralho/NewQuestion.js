@@ -13,9 +13,13 @@ class NewQuestion extends Component {
     }
 
     createQuestion = () => {
+        const { question, answer } = this.state;
         const key = this.props.navigation.state.params.deck;
-        // key.questions.push(this.state)
-        submitQuestion(key.title, this.state);
+        if(question && answer) {
+            submitQuestion(key.title, this.state, this.props.navigation);
+        } else {
+            alert('Campos obrigatórios estão em branco!')
+        }
     }
 
     render() {
