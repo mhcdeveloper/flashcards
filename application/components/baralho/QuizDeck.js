@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation'
 
+import { 
+    clearLocalNotification, 
+    setLocalNotification 
+} from '../../common/helpers/notifications';
+
 class QuizDeck extends Component {
     constructor(props) {
         super(props);
@@ -13,16 +18,26 @@ class QuizDeck extends Component {
         }
     }
 
+
     componentWillMount() {
         const deck = this.props.navigation.state.params.deck;
         this.setState({ deck: deck })
     }
 
+    //Metodo responsavel por mostrar a answer quando clicar no botão show answer
     showAnswer = () => {
         this.setState({ showAnswer: !this.state.showAnswer });
     }
 
+    //Metodo responsavel pela onPress dos botões de respostas correct ou incorrect
     answerType = (type) => {
+        //Responsavel por limpar a notificação caso o usuario inicia pelo menos uma question por dia
+        //E em seguida ja programa a notificação para o dia seguinte
+        clearLocalNotification()
+            .then(setLocalNotification())
+        
+        //Verificação de qual botão esta vindo o onPress, caso seja correct entra no if e atualiza os valores de correct asnwer
+        //Mas caso seja incorrect ele apenas atualiza a positon das question
         if(type === 'correct') {
             this.setState({ 
                 correctAnswer: this.state.correctAnswer + 1, 
@@ -35,6 +50,7 @@ class QuizDeck extends Component {
         }
     }
 
+    //Metodo responsavel pelo onPress do FinishQuiz, ou ele retorna ao DeckDetail ou reinicia o quiz
     resetOrBack = (action) => {
         if(action === 'back') {
             const backAction = NavigationActions.back()
@@ -48,6 +64,7 @@ class QuizDeck extends Component {
         }
     }
 
+    //Metodo responsavel por mostrar o resultado final do quiz
     finishQuiz = () => {
         const { position, correctAnswer, deck } = this.state;
         let totalPerguntas = deck.questions.length;
@@ -77,6 +94,9 @@ class QuizDeck extends Component {
     render () {
         const { deck, position, showAnswer } = this.state;
         let totalPerguntas = deck.questions.length;
+
+        //Verifico se a position for menor que o total de question ele continua as question
+        //Mas caso a position seja maior que a quantiade de questions ele reenderiza para o finishQuiz para mostrar o resultado
         if(position + 1 <= totalPerguntas) {
             return (
                 <View style={styles.container}>
@@ -88,7 +108,7 @@ class QuizDeck extends Component {
                                 <Text style={styles.textQuestion}>{deck.questions[position].answer}</Text> 
                                 <TouchableOpacity
                                     onPress={() => this.showAnswer()}>
-                                    <Text>Hidden Answer</Text>
+                                    <Text style={styles.textButton}>Question</Text>
                                 </TouchableOpacity>
                             </View>
                             :
@@ -96,7 +116,7 @@ class QuizDeck extends Component {
                                 <Text style={styles.textQuestion}>{deck.questions[position].question}</Text>
                                 <TouchableOpacity
                                     onPress={() => this.showAnswer()}>
-                                    <Text>Show Answer</Text>
+                                    <Text style={styles.textButton}>Show Answer</Text>
                                 </TouchableOpacity>
                             </View>
                         }
@@ -142,6 +162,11 @@ const styles = StyleSheet.create({
     textQuestion: {
         fontSize: 30,
         fontWeight: '500',
+        textAlign: 'center',
+    },
+    textButton: {
+        fontSize: 20,
+        fontWeight: '400',
         textAlign: 'center',
     },
     button: {

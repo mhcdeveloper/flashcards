@@ -40,6 +40,21 @@ export function submitQuestion(key, card, navigation) {
         })
 }
 
+//Metodo responsavel por remover o deck da lista
+export function removeDeck(key, navigation) {
+    return AsyncStorage.getItem(DECK_KEY)
+        .then(decks => {
+            const data = JSON.parse(decks) || []
+            data[key] = undefined;
+            delete data[key]
+
+            AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
+            
+            navigation.dispatch(resetAction)
+        })
+}
+
+//Metodo responsavel por redirecionar para tela inicial
 const resetAction = NavigationActions.reset({
     index: 0,
     actions: [

@@ -10,6 +10,7 @@ import {
     RefreshControl
 } from 'react-native';
 
+import { setLocalNotification } from '../../common/helpers/notifications';
 import ItemList from './ItemList';
 import { DECK_KEY } from '../../common/helpers/consts';
 
@@ -22,10 +23,13 @@ class ListDecks extends Component {
         }
     }
 
+    //Metodo life cycle responsavel por chamar o metodo que busca todos os deck e setar a logica de notification
     componentDidMount = () => {
         this.onRefresh();
+        setLocalNotification();
     }
     
+    //Metodo responsavel por buscar todos os decks da AsyncStorage
     onRefresh() {
         this.setState({ refreshing: true });
         AsyncStorage.getItem(DECK_KEY, (err, results) => {

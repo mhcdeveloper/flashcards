@@ -17,6 +17,7 @@ class ItemList extends Component {
         }
     }
     
+    //Metodo responsavel por abrir a tela de detalhe do deck clicado na lista
     openDetail = (item) => {
         const { bounceValue } = this.state;
         Animated.sequence([

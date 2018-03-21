@@ -12,6 +12,7 @@ class NewQuestion extends Component {
         }
     }
 
+    //Metodo responsavel por criar uma nova question do deck
     createQuestion = () => {
         const { question, answer } = this.state;
         const key = this.props.navigation.state.params.deck;

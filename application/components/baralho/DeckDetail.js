@@ -6,6 +6,8 @@ import {
     TouchableOpacity, 
 } from 'react-native';
 
+import BtnDeleteDeck from '../../common/widgets/btnDeleteDeck';
+
 class DeckDetail extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ class DeckDetail extends Component {
             deck: {},   
         }
     }
-
+    
     componentWillMount() {
         this.setState({ deck: this.props.navigation.state.params.item })
     }
@@ -24,6 +26,7 @@ class DeckDetail extends Component {
         const { navigation } = this.props;
         return (
             <View style={styles.container}>
+                <BtnDeleteDeck title={deck.title} navigation={navigation} />
                 <View style={styles.headerContainer}>
                     <Text style={styles.textHeader}>{deck.title}</Text>
                     <Text style={styles.textHeader}>{`${deck.questions.length} - Cards`}</Text>

@@ -18,6 +18,7 @@ class NewDeck extends Component {
         }
     }
     
+    //Metodo responsavel por criar um novo Deck
     createDeck = () => {
         const { title } = this.state;
         const { navigation } = this.props;
@@ -34,7 +35,7 @@ class NewDeck extends Component {
                 <Text style={styles.textLabel}>What is the title of your new deck ?</Text>
                 <TextInput 
                     underlineColorAndroid="transparent" 
-                    placeholder="Title" 
+                    placeholder="Deck Title" 
                     placeholderTextColor='#0082c9'
                     style={styles.textInput}
                     onChangeText={title => this.setState({ title })}
