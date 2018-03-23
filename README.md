@@ -10,3 +10,6 @@ depois de criado o card ele poderá remover o card ou ir acrescentando novas per
 * Abrir uma nova janela de comandos e entrar na pasta front-end `cd Flashcards`
 * Instalar as dependências `yarn install`
 * Iniciar o aplicativo `yarn start`
+
+# Plataformas 
+* Desenvolvido e testado especificamente para ANDROID.
